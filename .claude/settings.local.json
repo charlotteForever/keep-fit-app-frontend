@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(d:/Code/keep-fit-app-backend/prisma/schema.prisma:*)"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma:*)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:24158Wrc%40%40.@db.ddlxalbdmtcukxzdermm.supabase.co:5432/postgres\" npx prisma migrate dev:*)",
+      "Bash(npm run start:dev:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:www.cloudflare.com)",
+      "WebFetch(domain:cloud.baidu.com)"
+    ]
+  }
+}

@@ -17,11 +17,10 @@ interface FoodItem {
 }
 
 export const DietResultScreen: React.FC<Props> = ({ navigation, route }) => {
-  const { imageUri, mode, imageUrl, items: initialItems } = route.params as any;
+  const { imageUri, mode, items: initialItems } = route.params as any;
   const [loading, setLoading] = useState(false);
   const [mealType, setMealType] = useState('breakfast');
   const [items, setItems] = useState<FoodItem[]>(initialItems || []);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(imageUrl || '');
 
   const handleAddItem = () => {
     setItems([...items, { name: '', grams: 100, calories: 0, source: 'manual' }]);
@@ -62,18 +61,6 @@ export const DietResultScreen: React.FC<Props> = ({ navigation, route }) => {
 
     setLoading(true);
     try {
-      let finalImageUrl = uploadedImageUrl;
-
-      // Upload image if not uploaded yet
-      if (!finalImageUrl) {
-        const { uploadUrl, fileUrl } = await dietService.getUploadUrl(
-          `diet-${Date.now()}.jpg`,
-          'image/jpeg'
-        );
-        await dietService.uploadImage(imageUri, uploadUrl);
-        finalImageUrl = fileUrl;
-      }
-
       const total = {
         calories: calculateTotal(),
       };
@@ -82,7 +69,6 @@ export const DietResultScreen: React.FC<Props> = ({ navigation, route }) => {
         mode,
         status: mode === 'quick' ? 'pending' : 'confirmed',
         mealType,
-        images: [{ url: finalImageUrl }],
         items,
         total,
       };

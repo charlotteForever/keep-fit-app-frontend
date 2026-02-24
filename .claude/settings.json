@@ -6,7 +6,10 @@
       "Bash(npm run start:dev:*)",
       "Bash(npm uninstall:*)",
       "WebFetch(domain:www.cloudflare.com)",
-      "WebFetch(domain:cloud.baidu.com)"
+      "WebFetch(domain:cloud.baidu.com)",
+      "Bash(xargs grep -l \"ocr\\\\|OCR\\\\|upload\\\\|Upload\")",
+      "Bash(wc -l \"d:/Code/keep-fit-app-backend/src/modules/diet/services\"/*.ts)",
+      "Bash(npx expo install expo-file-system)"
     ]
   }
 }

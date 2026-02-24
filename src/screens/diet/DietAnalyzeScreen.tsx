@@ -13,21 +13,11 @@ export const DietAnalyzeScreen: React.FC<Props> = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [foods, setFoods] = useState<any[]>([]);
-  const [imageUrl, setImageUrl] = useState('');
 
   const handleAnalyze = async () => {
     setAnalyzing(true);
     try {
-      // Upload image
-      const { uploadUrl, fileUrl } = await dietService.getUploadUrl(
-        `food-${Date.now()}.jpg`,
-        'image/jpeg'
-      );
-      await dietService.uploadImage(imageUri, uploadUrl);
-      setImageUrl(fileUrl);
-
-      // Analyze photo
-      const result = await dietService.analyzePhoto(fileUrl);
+      const result = await dietService.analyzePhoto(imageUri);
 
       if (result.foods && result.foods.length > 0) {
         setFoods(result.foods);
@@ -63,7 +53,6 @@ export const DietAnalyzeScreen: React.FC<Props> = ({ navigation, route }) => {
     navigation.navigate('DietResult', {
       imageUri,
       mode,
-      imageUrl,
       items,
     });
   };

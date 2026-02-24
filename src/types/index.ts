@@ -33,7 +33,7 @@ export interface DietRecordData {
   mode: 'nutrition_label' | 'reference_photo' | 'quick';
   status: 'pending' | 'confirmed';
   mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
-  images: Array<{ url: string }>;
+  images?: Array<{ url: string }>;
   nutritionPer100g?: {
     calories: number;
     protein?: number;

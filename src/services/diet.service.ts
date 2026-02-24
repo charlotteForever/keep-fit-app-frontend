@@ -1,31 +1,21 @@
 import api from './api';
 import { DietRecordData } from '../types';
+import * as FileSystem from 'expo-file-system';
+
+const uriToBase64 = async (uri: string): Promise<string> => {
+  return await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+};
 
 export const dietService = {
-  getUploadUrl: async (fileName: string, contentType: string) => {
-    const response = await api.post('/diet/upload', { fileName, contentType });
+  analyzeLabel: async (imageUri: string) => {
+    const imageBase64 = await uriToBase64(imageUri);
+    const response = await api.post('/diet/analyze/label', { imageBase64 });
     return response.data;
   },
 
-  uploadImage: async (uri: string, uploadUrl: string) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    await fetch(uploadUrl, {
-      method: 'PUT',
-      body: blob,
-      headers: {
-        'Content-Type': 'image/jpeg',
-      },
-    });
-  },
-
-  analyzeLabel: async (imageUrl: string) => {
-    const response = await api.post('/diet/analyze/label', { imageUrl });
-    return response.data;
-  },
-
-  analyzePhoto: async (imageUrl: string, referenceType?: string) => {
-    const response = await api.post('/diet/analyze/photo', { imageUrl, referenceType });
+  analyzePhoto: async (imageUri: string, referenceType?: string) => {
+    const imageBase64 = await uriToBase64(imageUri);
+    const response = await api.post('/diet/analyze/photo', { imageBase64, referenceType });
     return response.data;
   },
 

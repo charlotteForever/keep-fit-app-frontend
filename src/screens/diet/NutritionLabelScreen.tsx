@@ -20,16 +20,8 @@ export const NutritionLabelScreen: React.FC<Props> = ({ navigation, route }) => 
   const handleAnalyze = async () => {
     setAnalyzing(true);
     try {
-      // Upload image
-      const { uploadUrl, fileUrl } = await dietService.getUploadUrl(
-        `nutrition-${Date.now()}.jpg`,
-        'image/jpeg'
-      );
-      await dietService.uploadImage(imageUri, uploadUrl);
-
-      // Analyze nutrition label
-      const result = await dietService.analyzeLabel(fileUrl);
-      setNutrition({ ...result.nutrition, imageUrl: fileUrl });
+      const result = await dietService.analyzeLabel(imageUri);
+      setNutrition(result.nutrition);
     } catch (error: any) {
       Alert.alert('识别失败', error.response?.data?.message || '请重新拍照或使用快捷模式');
       navigation.goBack();
@@ -65,7 +57,6 @@ export const NutritionLabelScreen: React.FC<Props> = ({ navigation, route }) => 
         mode: 'nutrition_label',
         status: 'confirmed',
         mealType,
-        images: [{ url: nutrition.imageUrl }],
         nutritionPer100g: nutrition,
         consumedGrams: grams,
         total,

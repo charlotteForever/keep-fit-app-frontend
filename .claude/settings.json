@@ -9,7 +9,10 @@
       "WebFetch(domain:cloud.baidu.com)",
       "Bash(xargs grep -l \"ocr\\\\|OCR\\\\|upload\\\\|Upload\")",
       "Bash(wc -l \"d:/Code/keep-fit-app-backend/src/modules/diet/services\"/*.ts)",
-      "Bash(npx expo install expo-file-system)"
+      "Bash(npx expo install expo-file-system)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx expo export --platform web --dev)",
+      "Bash(npx tsc --noEmit --skipLibCheck)"
     ]
   }
 }

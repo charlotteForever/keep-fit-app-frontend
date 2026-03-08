@@ -7,6 +7,7 @@ import { LoginScreen } from '../screens/auth/LoginScreen';
 import { RegisterScreen } from '../screens/auth/RegisterScreen';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { ProfileScreen } from '../screens/profile/ProfileScreen';
+import { AIChatScreen } from '../screens/ai/AIChatScreen';
 import { DietModeSelectScreen } from '../screens/diet/DietModeSelectScreen';
 import { DietCameraScreen } from '../screens/diet/DietCameraScreen';
 import { NutritionLabelScreen } from '../screens/diet/NutritionLabelScreen';
@@ -29,6 +30,11 @@ const MainTabs = () => {
         name="Home"
         component={HomeScreen}
         options={{ tabBarLabel: '首页' }}
+      />
+      <Tab.Screen
+        name="AI"
+        component={AIChatScreen}
+        options={{ tabBarLabel: 'AI' }}
       />
       <Tab.Screen
         name="Profile"
